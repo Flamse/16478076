@@ -1,0 +1,7 @@
+第四周上机任务：
+    1.clone上周的项目到本地
+    2.完成用户“注册”和“登录”功能，注册和登录需要做简单的信息验证
+    3.登录成功后需要跳转到“我的”页面
+    总结：不会跳转
+    参考博客：https://blog.csdn.net/weixin_41879980/article/details/95716572
+        https://blog.csdn.net/weixin_38199770/article/details/79391259
