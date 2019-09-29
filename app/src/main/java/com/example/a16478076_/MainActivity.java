@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 show.setText("用户名："+tUsername+("\n"));
                 show.append("密码："+tPassword+("\n"));
                 //页面跳转
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
                 startActivity(intent);
             }
         });
