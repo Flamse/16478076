@@ -1,6 +1,6 @@
 package com.example.a16478076_;
 
-public class FoodList {
+public class Food {
     private String foodName;
     private double foodPrice;
     private Integer foodNumber;

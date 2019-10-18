@@ -3,37 +3,44 @@ package com.example.a16478076_;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class OrderActivity extends AppCompatActivity {
 
 //    CheckBox cb_1, cb_2, cb_3, cb_4, cb_5, cb_6;
-    FoodList food_1 = new FoodList();
-    FoodList food_2 = new FoodList();
-    FoodList food_3 = new FoodList();
-    FoodList food_4 = new FoodList();
-    FoodList food_5 = new FoodList();
-    FoodList food_6 = new FoodList();
+    Food food_1 = new Food();
+    Food food_2 = new Food();
+    Food food_3 = new Food();
+    Food food_4 = new Food();
+    Food food_5 = new Food();
+    Food food_6 = new Food();
 //    RadioGroup yhq;
     EditText number;
     Button bt_submit;
+    ImageButton imageReduce;
+    ImageButton imageAdd;
+    TextView textCount;
     double totalPrice;
     ListView lv;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
 //        cb_1 = findViewById(R.id.cb_1);
 //        cb_2 = findViewById(R.id.cb_2);
 //        cb_3 = findViewById(R.id.cb_3);
@@ -49,8 +56,18 @@ public class OrderActivity extends AppCompatActivity {
         initValue(listItem);
         //适配器
         initAdapter(listItem);
+//        initEvent_RA();   //有问题
         initEvent_submit();
 //        initEvent_yhq();
+    }
+
+    private void initEvent_RA() {
+        imageAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("aa","d");
+            }
+        });
     }
 
     /**
@@ -124,12 +141,14 @@ public class OrderActivity extends AppCompatActivity {
                 new String[] {"ItemImage","ItemTitle", "ItemText"},
                 new int[] {R.id.ItemImage,R.id.ItemTitle,R.id.ItemText});
         lv.setAdapter(mSimpleAdapter);//为ListView绑定适配器
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-                setTitle("你点击了第"+arg2+"行");//设置标题栏显示点击的行
-            }
-        });
+
+
+//        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+//                setTitle("你点击了第"+arg2+"行");//设置标题栏显示点击的行
+//            }
+//        });
 
         /**
          * android.content.Context context,

@@ -28,3 +28,10 @@
     点击菜品后会提示此菜品已选购。
     参考博文：https://blog.csdn.net/hacker_crazy/article/details/83142507    //RelativeLayout属性
         https://blog.csdn.net/kai_zone/article/details/80170963
+第七周上级任务：
+
+    参考博文：https://blog.csdn.net/m0_37761307/article/details/78592193     //加减
+        https://www.runoob.com/w3cnote/android-tutorial-relativelayout.html //RelativeLayout属性
+        https://blog.csdn.net/m0_37761307/article/details/78592193  //加减，代码错误
+        https://github.com/JakeWharton/butterknife  //@OnClick
+        https://blog.csdn.net/qq_31235823/article/details/83028145  //butterknife出错
