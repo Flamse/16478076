@@ -1,6 +1,11 @@
 package com.example.a16478076_;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +17,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,7 +43,24 @@ public class OrderActivity extends AppCompatActivity {
     TextView textCount;
     double totalPrice;
     ListView lv;
+    Bitmap bitmap;
+    private Messenger messenger;
+    Message msg = Message.obtain();
 
+    private TextView tv;
+    private static final int UPDATE = 0;
+    /*private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO 接收消息并且去更新UI线程上的控件内容
+            if (msg.what == UPDATE) {
+                // Bundle b = msg.getData();
+                // tv.setText(b.getString("num"));
+                tv.setText(String.valueOf(msg.obj));
+            }
+            super.handleMessage(msg);
+        }
+    };*/
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +77,33 @@ public class OrderActivity extends AppCompatActivity {
 //        number = findViewById(R.id.et_number);
         /*定义一个动态数组，ListView中的数据*/
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<>();
-        //数据
-        initValue(listItem);
-        //适配器
-        initAdapter(listItem);
+        initImage();    //图片
+        initValue(listItem);   //数据
+        initAdapter(listItem);   //适配器
 //        initEvent_RA();   //有问题
         initEvent_submit();
 //        initEvent_yhq();
+    }
+
+    //加载图片
+    private void initImage() {
+        new Thread() {
+            @Override
+            public void run() {
+                // TODO 子线程中通过handler发送消息给handler接收，由handler去更新TextView的值
+                try {
+                    URL url = new URL("http://e.hiphotos.baidu.com/image/pic/item/4610b912c8fcc3cef70d70409845d688d53f20f7.jpg");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    InputStream in = connection.getInputStream();
+                    bitmap = BitmapFactory.decodeStream(in);
+                    msg.what = 1;
+                    msg.obj = bitmap;
+                    messenger.send(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void initEvent_RA() {
@@ -77,7 +122,7 @@ public class OrderActivity extends AppCompatActivity {
     private void initValue(ArrayList<HashMap<String, Object>> listItem) {
         /*Item*/
         HashMap<String, Object> map = new HashMap<>();
-        map.put("ItemImage", R.drawable.ic_launcher_background);
+        map.put("ItemImage", bitmap);                      //无效
         map.put("ItemTitle", "辣椒炒鸡蛋");
         map.put("ItemText", "￥10.00");
         listItem.add(map);
